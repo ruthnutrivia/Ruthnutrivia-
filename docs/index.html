@@ -92,6 +92,12 @@
   .month p{color:var(--muted);font-size:15.5px}
   @media(max-width:860px){.program{grid-template-columns:1fr;padding:28px 22px}}
 
+  .tools{margin-top:22px;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .tool{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;display:flex;gap:14px;align-items:flex-start}
+  .tool .ico{flex:none;width:44px;height:44px;border-radius:12px;background:var(--soft);display:grid;place-items:center;font-size:22px}
+  .tool h4{font-family:"EB Garamond",serif;font-size:21px;font-weight:600;line-height:1.2;margin-bottom:4px}
+  .tool p{color:var(--muted);font-size:15px}
+  .tools-title{font-family:"EB Garamond",serif;font-size:28px;margin-top:48px}
   /* steps */
   .steps{counter-reset:s;display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:36px}
   .step{counter-increment:s;padding-top:18px;border-top:2px solid var(--ink)}
@@ -242,6 +248,13 @@
         <div class="month"><small>Mes 2</small><h4>Trabajar la causa</h4><p>Abordamos lo que hay detrás de tus molestias y reintroducimos poco a poco los alimentos eliminados para ver qué toleras y en qué cantidad.</p></div>
         <div class="month"><small>Mes 3</small><h4>Recuperar y mantener</h4><p>Consolidamos lo conseguido: aprendes a mantener tu bienestar con una alimentación variada y te llevas las herramientas para seguir bien por tu cuenta.</p></div>
       </div>
+    </div>
+
+    <h3 class="tools-title reveal">Herramientas incluidas en el programa</h3>
+    <div class="tools">
+      <div class="tool reveal"><div class="ico">📋</div><div><h4>Guía FODMAP</h4><p>Qué alimentos eliminar, cuáles mantener y cómo reintroducirlos paso a paso.</p></div></div>
+      <div class="tool reveal"><div class="ico">🍵</div><div><h4>Guía de bebidas antiinflamatorias</h4><p>Recetas sencillas para acompañar tu digestión en el día a día.</p></div></div>
+      <div class="tool reveal"><div class="ico">🍽️</div><div><h4>Guía para comer fuera de casa</h4><p>Cómo elegir en restaurantes, cenas y viajes sin pasarlo mal después.</p></div></div>
     </div>
   </div>
 </section>
