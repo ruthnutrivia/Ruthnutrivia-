@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ruth Nutrivia · Nutricionista digestiva</title>
+<meta name="description" content="Nutricionista especializada en salud digestiva: hinchazón, SIBO, colon irritable. Come sin miedo y sin vivir a base de prohibiciones.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbf6ee; --bg-alt:#f3e9da; --card:#fffdf9;
+    --ink:#2e2520; --muted:#6d5f55; --line:#e4d6c3;
+    --accent:#b5653f; --accent-ink:#fff; --soft:#f6e3a8;
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font:17px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:"EB Garamond",Georgia,serif;font-weight:600;line-height:1.15;letter-spacing:-.01em}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  section{padding:88px 0}
+  .eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px}
+  .btn{display:inline-block;background:var(--accent);color:var(--accent-ink);text-decoration:none;padding:15px 28px;border-radius:999px;font-weight:600;transition:transform .15s,box-shadow .15s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(181,101,63,.28)}
+  .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+
+  /* nav */
+  header{position:sticky;top:0;z-index:10;background:rgba(251,246,238,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{font-family:"EB Garamond",serif;font-size:26px;font-weight:600;text-decoration:none}
+  .logo span{color:var(--accent);font-style:italic}
+  .links{display:flex;gap:28px;align-items:center;font-size:15px}
+  .links a{text-decoration:none;color:var(--muted)}
+  .links a:hover{color:var(--ink)}
+  .links .btn{color:#fff;padding:10px 20px}
+  @media(max-width:760px){.links a:not(.btn){display:none}}
+
+  /* hero */
+  .hero{padding:96px 0 104px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;right:-160px;top:-120px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,var(--soft),transparent 70%);opacity:.7}
+  .hero .wrap{position:relative}
+  .hero h1{font-size:clamp(42px,7vw,76px);max-width:820px}
+  .hero h1 em{color:var(--accent)}
+  .hero p.lead{font-size:clamp(18px,2.2vw,21px);color:var(--muted);max-width:600px;margin:24px 0 36px}
+  .hero .ctas{display:flex;gap:14px;flex-wrap:wrap}
+
+  /* signs */
+  .alt{background:var(--bg-alt)}
+  h2{font-size:clamp(32px,4.6vw,48px);margin-bottom:18px}
+  .intro{color:var(--muted);max-width:620px;margin-bottom:44px}
+  .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+  .card .n{font-family:"EB Garamond",serif;font-size:34px;color:var(--accent);line-height:1}
+  .card h3{font-size:23px;margin:10px 0 6px}
+  .card p{color:var(--muted);font-size:15.5px}
+  .quote{margin-top:44px;font-family:"EB Garamond",serif;font-style:italic;font-size:clamp(24px,3vw,32px);text-align:center}
+
+  /* about */
+  .about{display:grid;grid-template-columns:1fr 1.3fr;gap:56px;align-items:center}
+  .portrait{aspect-ratio:4/5;border-radius:200px 200px var(--radius) var(--radius);background:linear-gradient(160deg,var(--soft),var(--accent));display:flex;align-items:flex-end;justify-content:center;padding:28px;color:#fff;font-family:"EB Garamond",serif;font-size:22px;font-style:italic}
+  .about ul{list-style:none;margin-top:22px}
+  .about li{padding:10px 0 10px 30px;border-bottom:1px solid var(--line);position:relative}
+  .about li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:700}
+  @media(max-width:760px){.about{grid-template-columns:1fr}.portrait{max-width:320px;margin:0 auto;width:100%}}
+
+  /* services */
+  .svc{display:flex;flex-direction:column}
+  .svc .tag{display:inline-block;align-self:flex-start;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--soft);padding:5px 12px;border-radius:999px;margin-bottom:14px}
+  .svc ul{list-style:none;margin:14px 0 22px;color:var(--muted);font-size:15.5px;flex:1}
+  .svc li{padding:5px 0 5px 22px;position:relative}
+  .svc li::before{content:"•";position:absolute;left:4px;color:var(--accent)}
+  .svc .btn{text-align:center}
+  .svc.featured{border:2px solid var(--accent)}
+
+  /* steps */
+  .steps{counter-reset:s;display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .step{counter-increment:s;padding-top:18px;border-top:2px solid var(--ink)}
+  .step::before{content:"0" counter(s);font-family:"EB Garamond",serif;font-size:20px;color:var(--accent)}
+  .step h3{font-size:22px;margin:6px 0}
+  .step p{color:var(--muted);font-size:15.5px}
+
+  /* faq */
+  details{border-bottom:1px solid var(--line);padding:20px 0}
+  summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+  summary::after{content:"+";color:var(--accent);font-size:22px;line-height:1}
+  details[open] summary::after{content:"–"}
+  details p{color:var(--muted);margin-top:10px;max-width:720px}
+
+  /* contact */
+  .contact{background:var(--ink);color:#f7efe4;text-align:center}
+  .contact h2{color:#fff}
+  .contact .intro{color:#cdbfb0;margin:0 auto 36px}
+  .contact .ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .contact .btn.ghost{color:#fff;border-color:#fff}
+  footer{background:var(--ink);color:#9d8f82;text-align:center;font-size:13.5px;padding:0 0 36px}
+  footer .wrap{border-top:1px solid #4a3d35;padding-top:26px}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap"><nav>
+    <a href="#" class="logo">Ruth <span>Nutrivia</span></a>
+    <div class="links">
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#preguntas">Preguntas</a>
+      <a href="#contacto" class="btn">Reserva</a>
+    </div>
+  </nav></div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Nutricionista digestiva</p>
+    <h1>Vuelve a comer <em>sin miedo</em> y sin hincharte cada día.</h1>
+    <p class="lead">Hinchazón, gases, SIBO, colon irritable… No es «lo normal» ni es culpa tuya. Hay una razón, y se puede trabajar sin vivir a base de prohibiciones.</p>
+    <div class="ctas">
+      <a href="#taller" class="btn">Quiero el taller gratuito</a>
+      <a href="#servicios" class="btn ghost">Ver consultas</a>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <p class="eyebrow">¿Te suena?</p>
+    <h2>Señales de que tu digestión controla tu vida</h2>
+    <p class="intro">Si te identificas con alguna, no tienes que acostumbrarte a vivir así.</p>
+    <div class="grid">
+      <div class="card reveal"><div class="n">1</div><h3>Te levantas bien…</h3><p>…y a media mañana el pantalón ya aprieta. Por la noche, mejor ni hablar.</p></div>
+      <div class="card reveal"><div class="n">2</div><h3>Miras la carta antes</h3><p>Antes de aceptar una cena, ya estás pensando qué podrás comer sin pagarlo después.</p></div>
+      <div class="card reveal"><div class="n">3</div><h3>Eliges ropa ancha</h3><p>Tu digestión decide qué te pones según cómo te encuentres ese día.</p></div>
+      <div class="card reveal"><div class="n">4</div><h3>Has quitado de todo</h3><p>Cada vez comes menos cosas, y aun así los síntomas siguen apareciendo.</p></div>
+    </div>
+    <p class="quote reveal">No es normal. Y tiene solución.</p>
+  </div>
+</section>
+
+<section id="sobre-mi">
+  <div class="wrap about">
+    <div class="portrait reveal" role="img" aria-label="Espacio para tu foto">Tu foto aquí</div>
+    <div class="reveal">
+      <p class="eyebrow">Sobre mí</p>
+      <h2>Hola, soy Ruth</h2>
+      <p>Soy dietista-nutricionista especializada en salud digestiva. Acompaño a mujeres que llevan años conviviendo con hinchazón y molestias a entender qué les pasa y a recuperar una relación tranquila con la comida.</p>
+      <ul>
+        <li>Buscamos la causa, no solo tapamos síntomas</li>
+        <li>Pautas realistas, adaptadas a tu día a día</li>
+        <li>Sin dietas eternas ni listas interminables de prohibidos</li>
+        <li>Consulta online, estés donde estés</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="servicios" class="alt">
+  <div class="wrap">
+    <p class="eyebrow">Cómo puedo ayudarte</p>
+    <h2>Elige por dónde empezar</h2>
+    <p class="intro">Desde un primer paso gratuito hasta un acompañamiento completo.</p>
+    <div class="grid">
+      <div class="card svc reveal" id="taller">
+        <span class="tag">Gratis</span>
+        <h3>Taller: por qué te hinchas</h3>
+        <ul>
+          <li>Por qué la hinchazón aumenta con las horas</li>
+          <li>Errores habituales que la empeoran</li>
+          <li>Qué puedes empezar a hacer desde hoy</li>
+        </ul>
+        <a href="#contacto" class="btn">Apuntarme</a>
+      </div>
+      <div class="card svc featured reveal">
+        <span class="tag">Más elegido</span>
+        <h3>Consulta individual</h3>
+        <ul>
+          <li>Revisión de tu historia y síntomas</li>
+          <li>Plan de alimentación personalizado</li>
+          <li>Seguimiento y ajustes</li>
+          <li>Online por videollamada</li>
+        </ul>
+        <a href="#contacto" class="btn">Reservar consulta</a>
+      </div>
+      <div class="card svc reveal">
+        <span class="tag">Programa</span>
+        <h3>Acompañamiento digestivo</h3>
+        <ul>
+          <li>Varias semanas de trabajo conjunto</li>
+          <li>Abordaje de SIBO, SII y hinchazón</li>
+          <li>Reintroducción de alimentos sin miedo</li>
+          <li>Contacto entre consultas</li>
+        </ul>
+        <a href="#contacto" class="btn">Pedir información</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">El proceso</p>
+    <h2>Así trabajamos juntas</h2>
+    <div class="steps" style="margin-top:36px">
+      <div class="step reveal"><h3>Te escucho</h3><p>Revisamos tus síntomas, hábitos, analíticas y lo que ya has probado.</p></div>
+      <div class="step reveal"><h3>Entendemos la causa</h3><p>Buscamos el porqué de tu hinchazón para no ir a ciegas.</p></div>
+      <div class="step reveal"><h3>Plan a tu medida</h3><p>Pautas claras y realistas que encajan en tu vida.</p></div>
+      <div class="step reveal"><h3>Recuperas libertad</h3><p>Vuelves a comer variado, salir a cenar y vestirte sin pensar en tu tripa.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="preguntas" class="alt">
+  <div class="wrap">
+    <p class="eyebrow">Preguntas frecuentes</p>
+    <h2>Lo que más me preguntan</h2>
+    <div style="margin-top:28px">
+      <details><summary>¿Las consultas son online?</summary><p>Sí. Las consultas son por videollamada, así que puedes hacerlas desde casa, estés donde estés.</p></details>
+      <details><summary>¿Tengo que tener un diagnóstico de SIBO o colon irritable?</summary><p>No. Si tienes hinchazón, gases o molestias frecuentes, podemos empezar a trabajar y, si hace falta, te orientaré sobre qué pruebas comentar con tu médico.</p></details>
+      <details><summary>¿Voy a tener que dejar de comer muchas cosas?</summary><p>El objetivo es justo lo contrario: entender qué te sienta mal y por qué, para que puedas comer lo más variado posible.</p></details>
+      <details><summary>¿Cómo me apunto al taller gratuito?</summary><p>Escríbeme por Instagram con la palabra TALLER o usa el botón de contacto y te envío el enlace.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="contact">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--soft)">Da el primer paso</p>
+    <h2>¿Hablamos?</h2>
+    <p class="intro">Escríbeme y te cuento cómo podemos trabajar juntas. Respondo personalmente cada mensaje.</p>
+    <div class="ctas">
+      <!-- CAMBIA estos enlaces por los tuyos -->
+      <a class="btn" href="https://instagram.com/ruthnutrivia" target="_blank" rel="noopener">Escríbeme por Instagram</a>
+      <a class="btn ghost" href="https://wa.me/34600000000" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn ghost" href="mailto:tuemail@ejemplo.com">Email</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">© <span id="y">2026</span> Ruth Nutrivia · Nutrición digestiva. La información de esta web no sustituye el consejo médico.</div>
+</footer>
+
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
