@@ -1,117 +1,191 @@
-// Genera las diapositivas de los carruseles (1080x1350) con el estilo de los
-// carruseles de Ruth (caso Lidia): fondo crema, texto centrado, título serif con
-// palabra en terracota, etiqueta en mayúsculas espaciadas, citas en caja rosada.
+// Carruseles con la plantilla de Ruth (carrusel «Libertad Digestiva», 15 nov):
+// portada con foto oscurecida, contenido en crema con tarjetas blancas e iconos,
+// diapositiva de impacto en terracota y cierre en verde salvia.
 // Uso: node diciembre/generar-carruseles.js
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
 
 const DIR = __dirname;
+const foto = f => 'data:image/jpeg;base64,' + fs.readFileSync(path.join(DIR, 'fotos', f)).toString('base64');
 
-// **negrita**, ==palabra en terracota==, saltos de línea con \n
+// **negrita**, *cursiva terracota*, \n salto
 const fmt = s => s
-  .replace(/==(.+?)==/g, '<span class="acento">$1</span>')
   .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+  .replace(/\*(.+?)\*/g, '<em>$1</em>')
   .replace(/\n/g, '<br>');
 
 const carruseles = [
   {
     carpeta: '2026-11-27-lo-sano-que-te-hincha',
     slides: [
-      { portada: true, kicker: 'Hinchazón y SIBO', titulo: 'Lo ==«sano»== que te está hinchando', texto: 'No todo lo sano te sienta bien.' },
-      { kicker: '¿Te suena?', titulo: 'Lo hacías por cuidarte…', cita: 'Batido verde, ensalada gigante, kéfir…', texto: 'Y aun así, acabas el día ==hinchada==.' },
-      { kicker: 'No es dejadez', titulo: 'Estás haciendo todo «bien»', texto: 'Si comes sano y aun así te hinchas, no es falta de esfuerzo.\n\nEstás haciendo todo lo que se supone que es saludable.' },
-      { kicker: 'Lo que nadie te cuenta', titulo: 'Alimentos con buena fama que pueden ==hincharte== más', texto: 'Cuando tienes la tripa sensible, o hay SIBO:', lista: ['Mucha verdura cruda', 'Fermentados como el kéfir o el chucrut', 'Legumbres en cantidad'] },
-      { kicker: 'Ojo', titulo: '¿Significa que son malos?', grande: 'No.', texto: 'Ni que tengas que quitarlos para siempre.' },
-      { kicker: 'La clave', titulo: 'Depende de ==3 cosas==', lista: ['**Cuándo** los tomas', '**Cuánto** tomas', 'En qué **momento** estás tú'] },
-      { kicker: 'Por eso', titulo: 'Copiar lo «sano» de otra persona ==no te funciona==', cita: 'Tu plan tiene que ajustarse a tu intestino.' },
-      { cierre: true, kicker: 'Antes de irte', titulo: '==Guárdalo== y sígueme', texto: 'si quieres dejar de hacer lo «correcto» que no te funciona.' },
+      { tipo: 'portada', foto: 'ruth-sonrisa.jpg', pos: 'center 18%', pill: 'Hinchazón y SIBO', pre: 'Lo hacías por cuidarte…', titulo: 'Lo «sano» que te está hinchando', sub: 'No todo lo sano le sienta bien a tu tripa.' },
+      { tipo: 'tarjetas', kicker: '¿Te suena?', titulo: 'Batido verde, ensalada gigante, *kéfir…*', icono: '→', tarjetas: [
+        ['Comes «sano» cada día', 'Verdura, fruta, fermentados… todo lo que se supone que hay que comer.'],
+        ['Haces todo lo «correcto»', 'Has leído, te has informado y lo aplicas.'],
+        ['Y aun así acabas hinchada', 'No es dejadez ni falta de esfuerzo.'],
+      ] },
+      { tipo: 'tarjetas', kicker: 'Lo que nadie te cuenta', titulo: 'Alimentos con buena fama que *pueden hincharte*', icono: 'num', tarjetas: [
+        ['Mucha verdura cruda', 'Ensaladas grandes y crudités: más trabajo para una tripa sensible.'],
+        ['Fermentados', 'Kéfir, chucrut o kombucha no sientan bien a todas cuando hay SIBO.'],
+        ['Legumbres en cantidad', 'Son ricas en fibra que fermenta en el intestino.'],
+      ] },
+      { tipo: 'impacto', pill: 'Ojo', grande: 'No', titulo: 'significa que sean malos', texto: 'Ni que tengas que quitarlos para siempre.', cursiva: 'Depende de cómo y de cuándo.' },
+      { tipo: 'tarjetas', kicker: 'La clave', titulo: 'Depende de *3 cosas*', icono: 'num', tarjetas: [
+        ['Cuándo los tomas', 'No es lo mismo en la comida que en la cena.'],
+        ['Cuánto tomas', 'La cantidad que tolera tu intestino ahora.'],
+        ['En qué momento estás tú', 'Con síntomas activos o ya más estable.'],
+      ] },
+      { tipo: 'tarjetas', kicker: 'Por eso', titulo: 'Copiar lo «sano» de otra persona *no te funciona*', icono: '✓', tarjetas: [
+        ['Tu plan se ajusta a tu intestino', 'No a una lista sacada de internet.'],
+        ['A tus síntomas de ahora', 'Y va cambiando contigo.'],
+        ['Y a tu día a día real', 'Trabajo, horarios, comidas fuera.'],
+      ] },
+      { tipo: 'cierre', titulo: '¿Quieres dejar de hacer lo «correcto» que no te funciona?', texto: 'Guárdalo y sígueme: te enseño a entender tu digestión.', boton: ['Guárdalo y', 'SÍGUEME'] },
     ],
   },
   {
     carpeta: '2026-12-01-sibo-5-senales',
     slides: [
-      { portada: true, kicker: 'SIBO', titulo: '5 señales que ==no son solo== hinchazón', texto: '¿Cuántas te pasan a ti?' },
-      { kicker: 'Señal 1', titulo: 'Te hinchas cada vez más a lo largo del ==día==', texto: 'Por la mañana, bien.\nPor la tarde, el pantalón ya aprieta.' },
-      { kicker: 'Señal 2', titulo: 'Gases y eructos ==frecuentes==', texto: 'Aunque comas poco y despacio.' },
-      { kicker: 'Señal 3', titulo: 'Cansancio aunque ==duermas==', cita: 'Te levantas con la misma energía con la que te acostaste.' },
-      { kicker: 'Señal 4', titulo: 'Alimentos que antes tolerabas ahora te ==sientan mal==', texto: 'Legumbres, cebolla, fruta…\ny la lista crece.' },
-      { kicker: 'Señal 5', titulo: 'Tu tránsito ==va a días==', texto: 'Estreñimiento unos días,\ndiarrea otros.' },
-      { cierre: true, kicker: 'Si te reconoces en 3 o más', titulo: 'No lo ==normalices==', texto: 'Consúltalo con un profesional: tiene diagnóstico y tiene tratamiento.\n\n**Guárdalo y sígueme** para entender tu digestión.' },
+      { tipo: 'portada', foto: 'ruth-movil.jpg', pos: 'center 25%', pill: 'SIBO', pre: 'No es solo hinchazón', titulo: '5 señales que no debes normalizar', sub: '¿Cuántas te pasan a ti?' },
+      { tipo: 'tarjetas', kicker: 'Señales del SIBO', titulo: 'Lo que tu tripa *te está diciendo*', icono: 'num', tarjetas: [
+        ['Te hinchas a lo largo del día', 'Por la mañana bien; por la tarde, el pantalón ya aprieta.'],
+        ['Gases y eructos frecuentes', 'Aunque comas poco y despacio.'],
+        ['Cansancio aunque duermas', 'Te levantas con la misma energía con la que te acostaste.'],
+      ] },
+      { tipo: 'tarjetas', kicker: 'Señales del SIBO', titulo: 'Y dos más que *casi nadie relaciona*', icono: 'num', inicio: 4, tarjetas: [
+        ['Te sientan mal alimentos que antes tolerabas', 'Legumbres, cebolla, fruta… y la lista crece.'],
+        ['Tu tránsito va a días', 'Estreñimiento unos días, diarrea otros.'],
+      ] },
+      { tipo: 'impacto', pill: 'Si te reconoces', grande: '3', titulo: 'o más señales', texto: 'No lo normalices.', cursiva: 'Tiene diagnóstico y tiene tratamiento.' },
+      { tipo: 'tarjetas', kicker: 'Qué puedes hacer', titulo: 'Tu primer *paso*', icono: '✓', tarjetas: [
+        ['Apunta tus síntomas', 'Qué notas, cuándo aparece y qué habías comido.'],
+        ['Consulta con un profesional', 'El diagnóstico lo hace tu médico; la alimentación, una dietista especializada.'],
+        ['No quites alimentos por tu cuenta', 'Cuantos más quitas sin criterio, más miedo a comer.'],
+      ] },
+      { tipo: 'cierre', titulo: '¿Cuántas te pasan a ti?', texto: 'Cuéntamelo en comentarios y guárdalo para no olvidarlo.', boton: ['Comenta tu', 'NÚMERO'] },
     ],
   },
   {
     carpeta: '2026-12-05-3-claves-navidad',
     slides: [
-      { portada: true, kicker: 'Navidad sin hinchazón', titulo: '3 claves para no acabar ==hinchada== en Navidad', texto: 'Disfruta de las comidas sin miedo.' },
-      { kicker: 'Esto es para ti', titulo: '¿Ya piensas en cómo vas a ==acabar==?', cita: 'Hinchada, con gases y sin poder ni moverte.' },
-      { kicker: 'Clave 1', titulo: 'No llegues en ==ayunas==', texto: 'Saltarte comidas para «compensar» hace que llegues con muchísima hambre, comas rápido y más cantidad.\n\nY eso sí hincha.' },
-      { kicker: 'Clave 2', titulo: 'Despacio y raciones ==pequeñas==', texto: 'Sírvete un poco de lo que más te apetezca, en vez de picar de todo durante horas.' },
-      { kicker: 'Clave 3', titulo: 'Un ==paseo== después de comer', texto: '10 o 15 minutos ayudan a tu digestión mucho más que quedarte en el sofá.' },
-      { kicker: 'Recuerda', titulo: 'No se trata de comer ==menos==', cita: 'Se trata de que tu intestino funcione mejor. Y eso se puede trabajar.' },
-      { cierre: true, kicker: 'Antes de irte', titulo: '==Guárdalo== para las fiestas', texto: 'Y sígueme: te enseño a disfrutar de la Navidad sin miedo a comer.' },
+      { tipo: 'portada', foto: 'DSC_0454.jpg', pos: 'center 15%', pill: 'Navidad sin hinchazón', pre: 'Disfruta sin miedo a comer', titulo: '3 claves para no acabar hinchada', sub: 'Lo que hago con mis pacientes en estas fiestas.' },
+      { tipo: 'tarjetas', kicker: 'Esto es para ti', titulo: '¿Ya piensas en *cómo vas a acabar*?', icono: '→', tarjetas: [
+        ['Hinchada después de la cena', 'Desabrochándote el botón a escondidas.'],
+        ['Con gases y sin poder moverte', 'Mientras los demás siguen en la sobremesa.'],
+        ['Contando las horas', 'Para llegar a casa y ponerte cómoda.'],
+      ] },
+      { tipo: 'tarjetas', kicker: 'Las 3 claves', titulo: 'Así llegas a la cena *sin miedo*', icono: 'num', tarjetas: [
+        ['No llegues en ayunas', 'Saltarte comidas para «compensar» hace que comas rápido y más cantidad.'],
+        ['Despacio y raciones pequeñas', 'Sírvete un poco de lo que más te apetezca en vez de picar de todo.'],
+        ['Un paseo después de comer', '10 o 15 minutos ayudan a tu digestión más que el sofá.'],
+      ] },
+      { tipo: 'impacto', pill: 'Recuerda', grande: '✦', titulo: 'No se trata de comer menos', texto: 'Se trata de que tu intestino funcione mejor.', cursiva: 'Y eso se puede trabajar.' },
+      { tipo: 'cierre', titulo: '¿Quieres la guía completa para estas fiestas?', texto: 'Qué pedir, cómo organizar el día de la comida y qué hacer al día siguiente.', boton: ['Comenta la palabra', '«NAVIDAD»'] },
     ],
   },
   {
     carpeta: '2026-12-08-menu-navidad',
     slides: [
-      { portada: true, kicker: 'Navidad sin hinchazón', titulo: 'Qué pedir en el ==menú== de Navidad', texto: 'Si te hinchas con facilidad.' },
-      { kicker: 'Antes de empezar', titulo: 'No es una lista de ==prohibidos==', texto: 'Es una guía para elegir con más tranquilidad.', cita: 'Cada persona tolera cosas distintas.' },
-      { kicker: 'Entrantes', titulo: 'Para ==empezar==', mejor: 'Marisco a la plancha, jamón, crema de verduras', cuidado: 'Canapés con mucho pan, ensaladas con cebolla cruda' },
-      { kicker: 'Principales', titulo: 'El plato ==fuerte==', mejor: 'Pescado al horno, carne a la brasa, con patata o arroz', cuidado: 'Guisos con mucha cebolla y ajo, rebozados' },
-      { kicker: 'Postres', titulo: 'Para ==terminar==', mejor: 'Naranja o mandarina, un trocito de chocolate negro', cuidado: 'Postres con mucha nata, turrón en cantidad' },
-      { kicker: 'Bebida', titulo: 'Para ==brindar==', mejor: 'Agua sin gas, una copa de vino', cuidado: 'Refrescos y bebidas con gas' },
-      { cierre: true, kicker: 'Antes de irte', titulo: '==Guárdalo== para el día de la comida', texto: 'Y sígueme: te enseño a disfrutar de la Navidad sin miedo a comer.' },
+      { tipo: 'portada', foto: 'ruth-sobre-mi.jpg', pos: 'center 30%', pill: 'Navidad sin hinchazón', pre: 'Abres la carta y no sabes qué pedir', titulo: 'Qué pedir en el menú de Navidad', sub: 'Si te hinchas con facilidad.' },
+      { tipo: 'tarjetas', kicker: 'Antes de empezar', titulo: 'No es una lista de *prohibidos*', icono: '→', tarjetas: [
+        ['Es una guía para elegir', 'Con más tranquilidad y menos miedo.'],
+        ['Cada persona tolera cosas distintas', 'Por eso un plan tiene que ser personal.'],
+        ['Si algo te sienta bien, disfrútalo', 'La Navidad también es disfrutar.'],
+      ] },
+      { tipo: 'menu', kicker: 'Entrantes', titulo: 'Para *empezar*', mejor: 'Marisco a la plancha, jamón, crema de verduras.', cuidado: 'Canapés con mucho pan, ensaladas con cebolla cruda.', truco: 'Empieza por algo con proteína o verdura antes de lanzarte al pan.' },
+      { tipo: 'menu', kicker: 'Principales', titulo: 'El plato *fuerte*', mejor: 'Pescado al horno, carne a la brasa, con patata o arroz.', cuidado: 'Guisos con mucha cebolla y ajo, rebozados.', truco: 'Pide la salsa aparte y acompaña con patata o arroz.' },
+      { tipo: 'menu', kicker: 'Postres y bebida', titulo: 'Para *terminar*', mejor: 'Naranja o mandarina, un trocito de chocolate negro. Agua sin gas o una copa de vino.', cuidado: 'Postres con mucha nata, turrón en cantidad, refrescos y bebidas con gas.', truco: '¿Te apetece turrón? Un trozo pequeño, despacio y disfrutándolo.' },
+      { tipo: 'cierre', titulo: '¿Quieres la guía completa para estas fiestas?', texto: 'Guárdalo para el día de la comida y pídeme la guía.', boton: ['Comenta la palabra', '«NAVIDAD»'] },
     ],
   },
 ];
 
 const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=Inter:wght@300;400;500;600&display=swap');
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { width: 1080px; height: 1350px; overflow: hidden; }
-.s { width: 1080px; height: 1350px; position: relative; background: #f6efe6; color: #5b4033; text-align: center;
-     display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 170px 110px 190px; }
-.kicker { position: absolute; top: 80px; left: 0; right: 0; font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 30px;
-          letter-spacing: .22em; text-transform: uppercase; color: #c45c4f; }
-.acento { color: #c45c4f; }
-h1 { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 100px; line-height: 1.08; letter-spacing: -.01em; }
-h2 { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 80px; line-height: 1.12; letter-spacing: -.01em; }
-p { font-family: Inter, sans-serif; font-weight: 300; font-size: 40px; line-height: 1.55; margin-top: 44px; }
-p b { font-weight: 500; }
-.portada p { font-size: 44px; }
-.grande { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 170px; line-height: 1; color: #c45c4f; margin-top: 30px; }
-.cita { margin-top: 48px; width: 100%; background: #f0ded7; border-radius: 0 34px 34px 0; border-left: 12px solid #d48b80;
-        padding: 40px 50px; text-align: left; font-family: 'Source Serif 4', serif; font-style: italic; font-size: 46px; line-height: 1.45; }
-ul { list-style: none; margin-top: 44px; width: 100%; }
-li { font-family: Inter, sans-serif; font-weight: 300; font-size: 40px; line-height: 1.4; padding: 26px 0; border-bottom: 1.5px solid #e4d3c6; }
-li:first-child { border-top: 1.5px solid #e4d3c6; }
-li b { font-weight: 500; color: #c45c4f; }
-.caja { width: 100%; text-align: left; border-radius: 0 30px 30px 0; padding: 30px 44px; margin-top: 32px; }
-.caja .et { font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 26px; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 8px; }
-.caja .tx { font-family: Inter, sans-serif; font-weight: 300; font-size: 38px; line-height: 1.45; }
-.mejor { background: #ebe6d6; border-left: 12px solid #a9a37a; } .mejor .et { color: #7d7750; }
-.cuidado { background: #f0ded7; border-left: 12px solid #d48b80; } .cuidado .et { color: #c45c4f; }
-.pie { position: absolute; bottom: 62px; left: 0; right: 0; font-family: Inter, sans-serif; font-weight: 400; font-size: 27px; letter-spacing: .12em; color: #a39187; }
-.flecha { position: absolute; bottom: 52px; right: 90px; font-size: 46px; color: #c45c4f; font-family: Inter, sans-serif; }
-.linea { width: 90px; height: 3px; background: #d48b80; margin: 46px auto 0; }
-.firma { margin-top: 70px; font-family: 'Source Serif 4', serif; font-size: 36px; }
-.firma small { display: block; font-family: Inter, sans-serif; font-weight: 300; font-size: 28px; margin-top: 8px; color: #8a7466; }
+.s { width: 1080px; height: 1350px; position: relative; overflow: hidden; }
+.serif { font-family: 'Source Serif 4', serif; }
+em { font-family: 'Source Serif 4', serif; font-style: italic; font-weight: 400; color: #b05e51; }
+.handle { position: absolute; bottom: 58px; left: 0; right: 0; text-align: center; font-family: Inter, sans-serif; font-size: 27px; letter-spacing: .14em; }
+.flecha { position: absolute; bottom: 48px; right: 80px; font-family: Inter, sans-serif; font-size: 48px; }
+.pill { display: inline-block; font-family: Inter, sans-serif; font-weight: 600; font-size: 28px; letter-spacing: .24em; text-transform: uppercase;
+        background: #f4ece2; color: #b05e51; padding: 16px 34px; border-radius: 40px; }
+
+/* portada */
+.portada img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.portada .velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(42,30,24,.72) 0%, rgba(42,30,24,.55) 55%, rgba(42,30,24,.70) 100%); }
+.portada .txt { position: absolute; left: 90px; right: 90px; top: 160px; color: #f4ece2; }
+.portada .pre { font-family: 'Source Serif 4', serif; font-style: italic; font-size: 62px; margin-top: 46px; line-height: 1.15; }
+.portada h1 { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 118px; line-height: 1.02; color: #ecc5b7; margin-top: 30px; }
+.portada .raya { width: 90px; height: 3px; background: #f4ece2; margin: 56px 0 34px; opacity: .85; }
+.portada .sub { font-family: Inter, sans-serif; font-weight: 300; font-size: 40px; line-height: 1.45; max-width: 760px; }
+.portada .handle, .portada .flecha { color: #f4ece2; }
+
+/* contenido */
+.cont { background: #f3ede4; color: #5b4033; padding: 90px 100px 150px; display: flex; flex-direction: column; justify-content: center; }
+.kicker { font-family: Inter, sans-serif; font-weight: 600; font-size: 29px; letter-spacing: .24em; text-transform: uppercase; color: #b05e51; }
+.cont h2 { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 82px; line-height: 1.1; margin-top: 24px; }
+.cont h2 em { font-weight: 400; }
+.tarjetas { margin-top: 56px; display: flex; flex-direction: column; gap: 26px; }
+.tj { background: #fff; border-radius: 30px; padding: 36px 40px 36px 40px; display: flex; gap: 30px; align-items: flex-start; box-shadow: 0 2px 10px rgba(91,64,51,.05); }
+.ic { flex: 0 0 64px; height: 64px; border-radius: 50%; background: #f2dcd6; color: #b05e51; display: flex; align-items: center; justify-content: center;
+      font-family: 'Source Serif 4', serif; font-size: 34px; font-weight: 600; margin-top: 2px; }
+.ic.verde { background: #dfe7e2; color: #4f6b67; }
+.tj h3 { font-family: Inter, sans-serif; font-weight: 600; font-size: 38px; line-height: 1.25; color: #5b4033; }
+.tj p { font-family: Inter, sans-serif; font-weight: 300; font-size: 33px; line-height: 1.5; color: #6e5649; margin-top: 8px; }
+.cont .handle { color: #a39187; } .cont .flecha { color: #b05e51; }
+
+/* impacto */
+.impacto { background: #b05e51; color: #f4ece2; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 90px 60px; }
+.circ { position: absolute; border-radius: 50%; background: rgba(255,255,255,.1); }
+.impacto .bola { width: 400px; height: 400px; border-radius: 50%; background: #f4ece2; color: #b05e51; display: flex; align-items: center; justify-content: center;
+                 font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 230px; margin-top: 50px; box-shadow: 0 18px 40px rgba(0,0,0,.12); }
+.impacto h2 { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 92px; line-height: 1.08; margin-top: 50px; }
+.impacto p { font-family: Inter, sans-serif; font-weight: 300; font-size: 42px; margin-top: 30px; opacity: .92; }
+.impacto .cur { font-family: 'Source Serif 4', serif; font-style: italic; font-size: 50px; margin-top: 16px; }
+.impacto .handle, .impacto .flecha { color: #f4ece2; }
+
+/* cierre */
+.cierre { background: #627e7a; color: #fff; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 100px 60px; }
+.cierre h2 { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 92px; line-height: 1.1; }
+.cierre p { font-family: Inter, sans-serif; font-weight: 300; font-size: 42px; line-height: 1.5; margin-top: 40px; opacity: .95; }
+.boton { margin-top: 60px; background: #f2dcd6; color: #5b4033; border-radius: 90px; padding: 36px 80px; font-family: Inter, sans-serif; font-size: 40px; line-height: 1.35; }
+.boton b { display: block; color: #b05e51; font-weight: 700; font-size: 44px; }
+.cierre .handle { color: rgba(255,255,255,.85); }
 `;
 
 function slideHTML(s) {
-  let h = `<div class="s${s.portada ? ' portada' : ''}">`;
-  if (s.kicker) h += `<div class="kicker">${s.kicker}</div>`;
-  h += s.portada ? `<h1>${fmt(s.titulo)}</h1><div class="linea"></div>` : `<h2>${fmt(s.titulo)}</h2>`;
-  if (s.grande) h += `<div class="grande">${s.grande}</div>`;
-  if (s.texto) h += `<p>${fmt(s.texto)}</p>`;
-  if (s.cita) h += `<div class="cita">«${fmt(s.cita)}»</div>`.replace('««', '«');
-  if (s.lista) h += `<ul>${s.lista.map(l => `<li>${fmt(l)}</li>`).join('')}</ul>`;
-  if (s.mejor) h += `<div class="caja mejor"><div class="et">Mejor opción</div><div class="tx">${s.mejor}</div></div><div class="caja cuidado"><div class="et">Con cuidado</div><div class="tx">${s.cuidado}</div></div>`;
-  if (s.cierre) h += `<div class="firma">Ruth Jiménez<small>Dietista-nutricionista · SIBO e hinchazón abdominal</small></div>`;
-  h += `<div class="pie">@ruthjimenez.nutrivia</div>`;
-  if (!s.cierre) h += `<div class="flecha">→</div>`;
-  return h + '</div>';
+  if (s.tipo === 'portada') {
+    return `<div class="s portada"><img src="${foto(s.foto)}" style="object-position:${s.pos}"><div class="velo"></div>
+      <div class="txt"><span class="pill">${s.pill}</span><div class="pre">${s.pre}</div><h1>${s.titulo}</h1><div class="raya"></div><div class="sub">${s.sub}</div></div>
+      <div class="handle">@ruthjimenez.nutrivia</div><div class="flecha">→</div></div>`;
+  }
+  if (s.tipo === 'tarjetas') {
+    const ini = s.inicio || 1;
+    const tj = s.tarjetas.map(([t, d], i) => {
+      const ic = s.icono === 'num' ? ini + i : s.icono;
+      return `<div class="tj"><div class="ic">${ic}</div><div><h3>${t}</h3><p>${d}</p></div></div>`;
+    }).join('');
+    return `<div class="s cont"><div class="kicker">${s.kicker}</div><h2>${fmt(s.titulo)}</h2><div class="tarjetas">${tj}</div>
+      <div class="handle">@ruthjimenez.nutrivia</div><div class="flecha">→</div></div>`;
+  }
+  if (s.tipo === 'menu') {
+    return `<div class="s cont"><div class="kicker">${s.kicker}</div><h2>${fmt(s.titulo)}</h2><div class="tarjetas">
+      <div class="tj"><div class="ic verde">✓</div><div><h3>Mejor opción</h3><p>${s.mejor}</p></div></div>
+      <div class="tj"><div class="ic">!</div><div><h3>Con cuidado</h3><p>${s.cuidado}</p></div></div>
+      <div class="tj"><div class="ic">✦</div><div><h3>Mi truco</h3><p>${s.truco}</p></div></div></div>
+      <div class="handle">@ruthjimenez.nutrivia</div><div class="flecha">→</div></div>`;
+  }
+  if (s.tipo === 'impacto') {
+    return `<div class="s impacto"><div class="circ" style="width:620px;height:620px;right:-220px;top:-240px"></div><div class="circ" style="width:360px;height:360px;left:-160px;bottom:-120px"></div>
+      <span class="pill" style="position:relative">${s.pill}</span><div class="bola">${s.grande}</div><h2>${s.titulo}</h2><p>${s.texto}</p><div class="cur">${s.cursiva}</div>
+      <div class="handle">@ruthjimenez.nutrivia</div><div class="flecha">→</div></div>`;
+  }
+  return `<div class="s cierre"><div class="circ" style="width:460px;height:460px;left:-200px;top:-220px"></div><div class="circ" style="width:520px;height:520px;right:-200px;bottom:-260px"></div>
+    <h2 style="position:relative">${s.titulo}</h2><p style="position:relative">${s.texto}</p><div class="boton" style="position:relative">${s.boton[0]}<b>${s.boton[1]}</b></div>
+    <div class="handle">@ruthjimenez.nutrivia</div></div>`;
 }
 
 (async () => {
