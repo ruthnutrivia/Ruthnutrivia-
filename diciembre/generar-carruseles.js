@@ -69,7 +69,7 @@ const carruseles = [
   {
     carpeta: '2026-12-05-3-claves-navidad',
     slides: [
-      { tipo: 'portada', foto: 'IMG_9678.jpg', pos: 'center 75%', arriba: true, pill: 'Navidad sin hinchazón', pre: 'Disfruta sin miedo a comer', titulo: '3 claves para no acabar hinchada', sub: '' },
+      { tipo: 'portada', foto: 'IMG_9521.jpg', pos: 'center 20%', abajo: true, partido: true, bajo: true, pill: 'Navidad sin hinchazón', pre: 'Disfruta sin miedo a comer', titulo: '3 claves para no acabar hinchada', sub: 'Lo que hago con mis pacientes.' },
       { tipo: 'tarjetas', kicker: 'Esto es para ti', titulo: '¿Ya piensas en *cómo vas a acabar*?', icono: '→', tarjetas: [
         ['Hinchada después de la cena', 'Desabrochándote el botón a escondidas.'],
         ['Con gases y sin poder moverte', 'Mientras los demás siguen en la sobremesa.'],
@@ -87,7 +87,7 @@ const carruseles = [
   {
     carpeta: '2026-12-08-menu-navidad',
     slides: [
-      { tipo: 'portada', foto: 'IMG_9790.jpg', pos: 'center 25%', abajo: true, pill: 'Navidad sin hinchazón', pre: 'Abres la carta y no sabes qué pedir', titulo: 'Qué pedir en el menú de Navidad', sub: 'Si te hinchas con facilidad.' },
+      { tipo: 'portada', foto: 'IMG_9790.jpg', pos: 'center 25%', abajo: true, partido: true, pill: 'Navidad sin hinchazón', pre: 'Abres la carta y no sabes qué pedir', titulo: 'Qué pedir en el menú de Navidad', sub: 'Si te hinchas con facilidad.' },
       { tipo: 'tarjetas', kicker: 'Antes de empezar', titulo: 'No es una lista de *prohibidos*', icono: '→', tarjetas: [
         ['Es una guía para elegir', 'Con más tranquilidad y menos miedo.'],
         ['Cada persona tolera cosas distintas', 'Por eso un plan tiene que ser personal.'],
@@ -125,6 +125,9 @@ em { font-family: 'Source Serif 4', serif; font-style: italic; font-weight: 400;
 .portada .velo.arriba { background: linear-gradient(180deg, rgba(42,30,24,.82) 0%, rgba(42,30,24,.6) 40%, rgba(42,30,24,.08) 70%, rgba(42,30,24,.35) 100%); }
 .portada img.claro { filter: brightness(1.25); }
 .portada .txt.abajo { top: auto; bottom: 140px; }
+.portada .txt.alto { bottom: 230px; }
+.portada .txt.alto h1 { margin-top: 0; }
+.portada .velo.partido { background: linear-gradient(180deg, rgba(42,30,24,.78) 0%, rgba(42,30,24,.35) 25%, rgba(42,30,24,.2) 40%, rgba(42,30,24,.8) 62%, rgba(42,30,24,.88) 100%); }
 .portada .velo.abajo { background: linear-gradient(180deg, rgba(42,30,24,.15) 0%, rgba(42,30,24,.25) 35%, rgba(42,30,24,.80) 62%, rgba(42,30,24,.88) 100%); }
 
 /* contenido */
@@ -162,8 +165,9 @@ em { font-family: 'Source Serif 4', serif; font-style: italic; font-weight: 400;
 
 function slideHTML(s) {
   if (s.tipo === 'portada') {
-    return `<div class="s portada"><img class="${s.arriba ? 'claro' : ''}" src="${foto(s.foto)}" style="object-position:${s.pos}"><div class="velo${s.abajo ? ' abajo' : ''}${s.arriba ? ' arriba' : ''}"></div>
-      <div class="txt${s.abajo ? ' abajo' : ''}"><span class="pill">${s.pill}</span><div class="pre">${s.pre}</div><h1>${s.titulo}</h1>${s.sub ? `<div class="raya"></div><div class="sub">${s.sub}</div>` : ''}</div>
+    return `<div class="s portada"><img class="${s.arriba ? 'claro' : ''}" src="${foto(s.foto)}" style="object-position:${s.pos}"><div class="velo${s.partido ? ' partido' : (s.abajo ? ' abajo' : '')}${s.arriba ? ' arriba' : ''}"></div>
+      ${s.partido ? `<div class="txt"><span class="pill">${s.pill}</span><div class="pre">${s.pre}</div></div>` : ''}
+      <div class="txt${s.abajo ? ' abajo' : ''}${s.partido && !s.bajo ? ' alto' : ''}">${s.partido ? '' : `<span class="pill">${s.pill}</span><div class="pre">${s.pre}</div>`}<h1>${s.titulo}</h1>${s.sub ? `<div class="raya"></div><div class="sub">${s.sub}</div>` : ''}</div>
       <div class="handle">@ruthjimenez.nutrivia</div><div class="flecha">→</div></div>`;
   }
   if (s.tipo === 'tarjetas') {
