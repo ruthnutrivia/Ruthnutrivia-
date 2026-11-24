@@ -69,7 +69,7 @@ const carruseles = [
   {
     carpeta: '2026-12-05-3-claves-navidad',
     slides: [
-      { tipo: 'portada', foto: 'IMG_9299.jpg', pos: 'center 35%', arriba: true, pill: 'Navidad sin hinchazón', pre: 'Disfruta sin miedo a comer', titulo: '3 claves para no acabar hinchada', sub: '' },
+      { tipo: 'portada', foto: 'IMG_9299.jpg', pos: 'center 35%', nota: true, pill: 'Navidad sin hinchazón', pre: 'Disfruta sin miedo a comer', titulo: '3 claves para no acabar *hinchada*', sub: 'Lo que hago con mis pacientes.' },
       { tipo: 'tarjetas', kicker: 'Esto es para ti', titulo: '¿Ya piensas en *cómo vas a acabar*?', icono: '→', tarjetas: [
         ['Hinchada después de la cena', 'Desabrochándote el botón a escondidas.'],
         ['Con gases y sin poder moverte', 'Mientras los demás siguen en la sobremesa.'],
@@ -99,6 +99,64 @@ const carruseles = [
       { tipo: 'cierre', titulo: '¿Quieres la guía completa para estas fiestas?', texto: 'Guárdalo para el día de la comida y pídeme la guía.', boton: ['Comenta la palabra', '«NAVIDAD»'] },
     ],
   },
+  {
+    carpeta: '2026-12-14-caso-lidia',
+    slides: [
+      { tipo: 'portada', foto: 'IMG_6186.jpg', pos: 'center 20%', abajo: true, pill: 'Caso real', pre: '«Pero si con esta lista no puedo comer de nada»', titulo: 'De una lista de prohibidos a volver a comer', sub: 'El caso de Lidia.' },
+      { tipo: 'tarjetas', kicker: 'El punto de partida', titulo: 'A Lidia le diagnostican *SIBO*', icono: '→', tarjetas: [
+        ['Le dan una dieta baja en FODMAP', 'Y una lista de alimentos que no sabe cómo llevar a su día a día.'],
+        ['Su lista «segura» es cada vez más corta', 'Y el miedo a comer, cada vez más grande.'],
+        ['Cada comida se convierte en un examen', 'En casa, en el trabajo y fuera.'],
+      ] },
+      { tipo: 'tarjetas', kicker: 'Cómo lo trabajamos', titulo: 'Juntas, *paso a paso*', icono: 'num', tarjetas: [
+        ['Entender qué pasaba de verdad', 'Su digestión, su tránsito y su día a día.'],
+        ['Adaptar la dieta a su vida real', 'No a una lista sacada de internet.'],
+        ['Reintroducir alimentos poco a poco', 'Porque la dieta baja en FODMAP es temporal, no para siempre.'],
+      ] },
+      { tipo: 'impacto', pill: 'Recuerda', grande: '✦', titulo: 'La dieta baja en FODMAP no es para siempre', texto: 'Es una herramienta temporal.', cursiva: 'Lo importante viene después.' },
+      { tipo: 'cierre', titulo: '¿Te reconoces en su historia?', texto: 'Miramos tu caso juntas en una llamada gratuita.', boton: ['Escríbeme la palabra', '«VALORACIÓN»'] },
+    ],
+  },
+  {
+    carpeta: '2026-12-19-preguntas-programa',
+    slides: [
+      { tipo: 'portada', foto: 'IMG_6777.jpg', pos: 'center 25%', abajo: true, pill: 'Libertad Digestiva', pre: 'Antes de empezar', titulo: 'Lo que me preguntáis antes de entrar', sub: 'Respondo a tus dudas.' },
+      { tipo: 'tarjetas', kicker: 'Tus dudas', titulo: '«¿Y si ya lo he *probado todo*?»', icono: '→', tarjetas: [
+        ['No empezamos por otra dieta', 'Empezamos por entender por qué lo anterior no te funcionó.'],
+        ['¿Tendré que dejar de comer fuera?', 'No. Aprendes a elegir en restaurantes y comidas familiares.'],
+        ['¿Sirve si no tengo diagnóstico de SIBO?', 'Sí. Trabajamos hinchazón, gases y digestiones pesadas.'],
+      ] },
+      { tipo: 'tarjetas', kicker: 'Tus dudas', titulo: '«¿Cuánto *tiempo* necesito?»', icono: '✓', tarjetas: [
+        ['Se adapta a tu horario', 'El plan se ajusta a tu trabajo y a tu vida, no al revés.'],
+        ['No estás sola entre sesiones', 'Acompañamiento diario por WhatsApp.'],
+        ['¿Y si vuelven los síntomas al terminar?', 'Te vas con un plan para saber qué hacer.'],
+      ] },
+      { tipo: 'cierre', titulo: '¿Tienes otra duda?', texto: 'Escríbeme y te respondo por privado.', boton: ['Escríbeme la palabra', '«ENERO»'] },
+    ],
+  },
+  {
+    carpeta: '2026-12-23-plazas-enero',
+    slides: [
+      { tipo: 'portada', foto: 'IMG_6782.jpg', pos: 'center 25%', abajo: true, partido: true, bajo: true, pill: 'Plazas abiertas', pre: 'Grupo de enero', titulo: 'Libertad Digestiva', sub: 'Para mujeres con hinchazón o SIBO.' },
+      { tipo: 'tarjetas', kicker: 'Para quién es', titulo: 'Este programa es *para ti si…*', icono: '→', tarjetas: [
+        ['Llevas tiempo con hinchazón, gases o digestiones pesadas', 'Y condicionan tu día a día.'],
+        ['Ya has probado dietas, suplementos o antibióticos', 'Y no ha funcionado.'],
+        ['Quieres volver a disfrutar de la comida', 'Sin seguir eliminando alimentos uno tras otro.'],
+      ] },
+      { tipo: 'tarjetas', kicker: 'Qué incluye', titulo: 'Dentro *encontrarás:*', icono: '✓', tarjetas: [
+        ['3 meses de acompañamiento 1 a 1', 'Sesiones conmigo para entender qué le pasa a tu digestión.'],
+        ['Menús y plantillas personalizados', 'Adaptados a tus gustos y a tu día a día.'],
+        ['Acompañamiento diario por WhatsApp', 'Para que nunca te sientas sola en el proceso.'],
+      ] },
+      { tipo: 'tarjetas', kicker: 'Bonus · solo hasta hoy', titulo: 'Si reservas *hoy*, te llevas:', icono: '🎁', tarjetas: [
+        ['Guía de bebidas antiinflamatorias', 'Recetas sencillas para cuidar tu digestión cada día.'],
+        ['Guía de alimentos FODMAP', 'Qué tomar, en qué cantidad y cambios fáciles.'],
+        ['Guía para comer fuera de casa', 'Restaurantes y celebraciones sin miedo.'],
+      ] },
+      { tipo: 'impacto', pill: 'Plazas limitadas', grande: '5', titulo: 'plazas para enero', texto: 'Cuando se llenen, se cierra.', cursiva: 'No hay lista de espera.' },
+      { tipo: 'cierre', titulo: '¿Quieres empezar en enero?', texto: 'Te cuento todo por privado.', boton: ['Escríbeme la palabra', '«ENERO»'] },
+    ],
+  },
 ];
 
 const CSS = `
@@ -124,6 +182,11 @@ em { font-family: 'Source Serif 4', serif; font-style: italic; font-weight: 400;
 .portada .handle, .portada .flecha { color: #f4ece2; }
 .portada .velo.arriba { background: linear-gradient(180deg, rgba(42,30,24,.82) 0%, rgba(42,30,24,.6) 40%, rgba(42,30,24,.08) 70%, rgba(42,30,24,.35) 100%); }
 .portada img.claro { filter: brightness(1.25); }
+.portada .velo.nota { background: linear-gradient(180deg, rgba(42,30,24,.75) 0%, rgba(42,30,24,.35) 30%, rgba(42,30,24,.05) 55%, rgba(42,30,24,.35) 100%); }
+.tnota { position: absolute; left: 0; top: 590px; width: 680px; background: rgba(246,239,230,.98); border-radius: 0 34px 34px 0; padding: 50px 52px 54px 90px; box-shadow: 0 20px 50px rgba(0,0,0,.35); }
+.tnota h1 { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 84px; line-height: 1.05; color: #5b4033; }
+.tnota .raya { width: 80px; height: 3px; background: #d48b80; margin: 34px 0 22px; }
+.tnota .sub { font-family: Inter, sans-serif; font-weight: 300; font-size: 36px; color: #6e5649; }
 .portada .txt.abajo { top: auto; bottom: 140px; }
 .portada .txt.alto { bottom: 230px; }
 .portada .txt.alto h1 { margin-top: 0; }
@@ -164,10 +227,16 @@ em { font-family: 'Source Serif 4', serif; font-style: italic; font-weight: 400;
 `;
 
 function slideHTML(s) {
+  if (s.tipo === 'portada' && s.nota) {
+    return `<div class="s portada"><img src="${foto(s.foto)}" style="object-position:${s.pos}"><div class="velo nota"></div>
+      <div class="txt"><span class="pill">${s.pill}</span><div class="pre">${s.pre}</div></div>
+      <div class="tnota"><h1>${fmt(s.titulo)}</h1><div class="raya"></div><div class="sub">${s.sub}</div></div>
+      <div class="handle">@ruthjimenez.nutrivia</div><div class="flecha">→</div></div>`;
+  }
   if (s.tipo === 'portada') {
     return `<div class="s portada"><img class="${s.arriba ? 'claro' : ''}" src="${foto(s.foto)}" style="object-position:${s.pos}"><div class="velo${s.partido ? ' partido' : (s.abajo ? ' abajo' : '')}${s.arriba ? ' arriba' : ''}"></div>
       ${s.partido ? `<div class="txt"><span class="pill">${s.pill}</span><div class="pre">${s.pre}</div></div>` : ''}
-      <div class="txt${s.abajo ? ' abajo' : ''}${s.partido && !s.bajo ? ' alto' : ''}">${s.partido ? '' : `<span class="pill">${s.pill}</span><div class="pre">${s.pre}</div>`}<h1>${s.titulo}</h1>${s.sub ? `<div class="raya"></div><div class="sub">${s.sub}</div>` : ''}</div>
+      <div class="txt${s.abajo ? ' abajo' : ''}${s.partido && !s.bajo ? ' alto' : ''}">${s.partido ? '' : `<span class="pill">${s.pill}</span><div class="pre">${s.pre}</div>`}<h1>${fmt(s.titulo)}</h1>${s.sub ? `<div class="raya"></div><div class="sub">${s.sub}</div>` : ''}</div>
       <div class="handle">@ruthjimenez.nutrivia</div><div class="flecha">→</div></div>`;
   }
   if (s.tipo === 'tarjetas') {
