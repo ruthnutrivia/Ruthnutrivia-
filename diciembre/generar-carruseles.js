@@ -69,7 +69,7 @@ const carruseles = [
   {
     carpeta: '2026-12-05-3-claves-navidad',
     slides: [
-      { tipo: 'portada', foto: 'IMG_9521.jpg', pos: 'center 20%', abajo: true, partido: true, bajo: true, pill: 'Navidad sin hinchazón', pre: 'Disfruta sin miedo a comer', titulo: '3 claves para no acabar hinchada', sub: 'Lo que hago con mis pacientes.' },
+      { tipo: 'portada', foto: 'IMG_9299.jpg', pos: 'center 35%', arriba: true, pill: 'Navidad sin hinchazón', pre: 'Disfruta sin miedo a comer', titulo: '3 claves para no acabar hinchada', sub: '' },
       { tipo: 'tarjetas', kicker: 'Esto es para ti', titulo: '¿Ya piensas en *cómo vas a acabar*?', icono: '→', tarjetas: [
         ['Hinchada después de la cena', 'Desabrochándote el botón a escondidas.'],
         ['Con gases y sin poder moverte', 'Mientras los demás siguen en la sobremesa.'],
