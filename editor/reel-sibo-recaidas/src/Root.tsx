@@ -7,6 +7,7 @@ import {loadFont as loadSerif} from '@remotion/google-fonts/InstrumentSerif';
 import {loadFont as loadBebas} from '@remotion/google-fonts/BebasNeue';
 import {loadFont as loadPoppins} from '@remotion/google-fonts/Poppins';
 import WORDS from './words.json';
+import {Cutaway, BloatedWoman, GutBacteria, SupplementsTable, CalmCup} from './Illustrations';
 
 const serif = loadSerif('normal', {weights: ['400'], subsets: ['latin']}).fontFamily;
 loadSerif('italic', {weights: ['400'], subsets: ['latin']});
@@ -98,9 +99,9 @@ const Captions: React.FC = () => {
   return (
     <AbsoluteFill style={{alignItems: 'center', top: 1150, height: 200}}>
       <div style={{transform: `scale(${sc})`, fontFamily: pop, fontWeight: 600, fontSize: 64,
-        color: C.blanco, textShadow: SHADOW, textAlign: 'center', padding: '0 80px', letterSpacing: -0.5}}>
+        color: C.blanco, textShadow: '0 2px 3px rgba(50,32,22,.75), 0 4px 22px rgba(50,32,22,.6)', textAlign: 'center', padding: '0 80px', letterSpacing: -0.5}}>
         {c.words.map((w, i) => (
-          <span key={i} style={{color: t >= w.s ? (t < w.e + 0.05 ? C.amarillo : C.blanco) : 'rgba(255,255,255,.55)'}}>
+          <span key={i} style={{color: t >= w.s ? (t < w.e + 0.05 ? C.amarillo : C.blanco) : 'rgba(255,255,255,.72)'}}>
             {clean(w.w)}{i < c.words.length - 1 ? ' ' : ''}
           </span>
         ))}
@@ -245,6 +246,10 @@ const Seq: React.FC<{from: number; to: number; children: (dur: number) => React.
 const Edit: React.FC = () => (
   <AbsoluteFill>
     <Base />
+    <Seq from={4.85} to={8.35}>{(d) => <Cutaway dur={d}><BloatedWoman /></Cutaway>}</Seq>
+    <Seq from={12.3} to={14.6}>{(d) => <Cutaway dur={d}><GutBacteria /></Cutaway>}</Seq>
+    <Seq from={19.0} to={21.5}>{(d) => <Cutaway dur={d}><SupplementsTable /></Cutaway>}</Seq>
+    <Seq from={28.3} to={30.3}>{(d) => <Cutaway dur={d}><CalmCup /></Cutaway>}</Seq>
     <Seq from={0} to={3.7}>{(d) => <Hook dur={d} />}</Seq>
     <Seq from={3.75} to={4.8}>{(d) => <Keyword text="HINCHAZÓN" sub="y la" dur={d} color={C.rosa} />}</Seq>
 
@@ -275,7 +280,7 @@ const Edit: React.FC = () => (
         <Item at={at(25.75 - 22.4)} icon="check">Tu vida</Item>
       </Card>)}</Seq>
 
-    <Seq from={27.6} to={29.3}>{(d) => <Keyword text="RECAÍDA" sub="qué hacer si hay una" dur={d} color={C.rosa} />}</Seq>
+    <Seq from={27.55} to={28.35}>{(d) => <Keyword text="RECAÍDA" sub="qué hacer si hay una" dur={d} color={C.rosa} />}</Seq>
     <Seq from={30.3} to={31.4}>{(d) => <Keyword text="EL MIEDO" sub="cómo vives" dur={d} />}</Seq>
     <Seq from={31.5} to={VIDEO_END - 0.3}>{(d) => <Pill text="Sígueme ♡" dur={d} />}</Seq>
 
