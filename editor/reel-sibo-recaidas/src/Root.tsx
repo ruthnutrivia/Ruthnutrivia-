@@ -104,8 +104,8 @@ const Captions: React.FC = () => {
   if (!c || t > 35.9) return null;
   return (
     <AbsoluteFill style={{alignItems: 'center', top: 1130, height: 260}}>
-      <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'baseline', columnGap: 22,
-        padding: '0 70px', fontFamily: fraunces, fontWeight: 800}}>
+      <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'baseline', columnGap: 16,
+        padding: '0 70px', fontFamily: pop}}>
         {c.words.map((w, i) => {
           const txt = clean(w.w);
           const key = KEY.has(txt);
@@ -113,8 +113,8 @@ const Captions: React.FC = () => {
           const p = spring({frame: local, fps: FPS, config: {damping: 11, stiffness: 260, mass: 0.6}});
           if (local < 0) return null;
           return (
-            <span key={i} style={{display: 'inline-block', fontSize: key ? 104 : 82, lineHeight: 1.05,
-              fontStyle: key ? 'italic' : 'normal', letterSpacing: key ? -1 : -0.5,
+            <span key={i} style={{display: 'inline-block', fontSize: key ? 80 : 66, lineHeight: 1.1,
+              fontWeight: key ? 700 : 600, letterSpacing: -0.5,
               color: key ? C.amarillo : C.blanco, textShadow: CAP_SHADOW,
               transform: `translateY(${(1 - p) * 26}px) scale(${0.7 + 0.3 * p}) rotate(${key ? -3 * p : 0}deg)`,
               opacity: Math.min(1, p * 2)}}>{txt}</span>
