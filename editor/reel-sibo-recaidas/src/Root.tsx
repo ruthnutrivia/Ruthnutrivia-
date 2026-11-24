@@ -226,17 +226,11 @@ const Watermark: React.FC = () => {
 };
 
 const Outro: React.FC = () => {
-  const p = usePop(0), q = usePop(10), r = usePop(18);
+  const r = usePop(4);
   return (
-    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 26}}>
-      <div style={{transform: `scale(${p})`, width: 170, height: 170, borderRadius: 46,
-        background: `linear-gradient(135deg, ${C.amarillo}, ${C.rosa} 55%, ${C.marron})`,
-        display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 14px 40px rgba(0,0,0,.35)'}}>
-        <IgIcon size={110} />
-      </div>
-      <div style={{fontFamily: pop, fontWeight: 600, fontSize: 52, color: C.blanco, opacity: q, letterSpacing: 1}}>{HANDLE}</div>
-      <div style={{fontFamily: serif, fontStyle: 'italic', fontSize: 84, color: C.amarillo, opacity: r,
-        transform: `translateY(${(1 - r) * 20}px)`}}>Guarda y sígueme</div>
+    <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center'}}>
+      <div style={{fontFamily: serif, fontStyle: 'italic', fontSize: 110, color: C.amarillo, opacity: r,
+        textShadow: SHADOW, transform: `translateY(${(1 - r) * 24}px)`}}>Guarda y sígueme</div>
     </AbsoluteFill>
   );
 };
@@ -251,7 +245,6 @@ const Seq: React.FC<{from: number; to: number; children: (dur: number) => React.
 const Edit: React.FC = () => (
   <AbsoluteFill>
     <Base />
-    <Watermark />
     <Seq from={0} to={3.7}>{(d) => <Hook dur={d} />}</Seq>
     <Seq from={3.75} to={4.8}>{(d) => <Keyword text="HINCHAZÓN" sub="y la" dur={d} color={C.rosa} />}</Seq>
 
