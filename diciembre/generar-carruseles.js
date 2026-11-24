@@ -19,7 +19,7 @@ const carruseles = [
   {
     carpeta: '2026-11-27-lo-sano-que-te-hincha',
     slides: [
-      { tipo: 'portada', foto: 'ruth-sonrisa.jpg', pos: 'center 18%', pill: 'Hinchazón y SIBO', pre: 'Lo hacías por cuidarte…', titulo: 'Lo «sano» que te está hinchando', sub: 'No todo lo sano le sienta bien a tu tripa.' },
+      { tipo: 'portada', foto: 'IMG_5316.jpg', pos: 'center 20%', abajo: true, pill: 'Hinchazón y SIBO', pre: 'Lo hacías por cuidarte…', titulo: 'Lo «sano» que te está hinchando', sub: 'No todo lo sano le sienta bien a tu tripa.' },
       { tipo: 'tarjetas', kicker: '¿Te suena?', titulo: 'Batido verde, ensalada gigante, *kéfir…*', icono: '→', tarjetas: [
         ['Comes «sano» cada día', 'Verdura, fruta, fermentados… todo lo que se supone que hay que comer.'],
         ['Haces todo lo «correcto»', 'Has leído, te has informado y lo aplicas.'],
@@ -47,7 +47,7 @@ const carruseles = [
   {
     carpeta: '2026-12-01-sibo-5-senales',
     slides: [
-      { tipo: 'portada', foto: 'ruth-movil.jpg', pos: 'center 25%', pill: 'SIBO', pre: 'No es solo hinchazón', titulo: '5 señales que no debes normalizar', sub: '¿Cuántas te pasan a ti?' },
+      { tipo: 'portada', foto: 'IMG_6160.jpg', pos: 'center 20%', abajo: true, pill: 'SIBO', pre: 'No es solo hinchazón', titulo: '5 señales que no debes normalizar', sub: '¿Cuántas te pasan a ti?' },
       { tipo: 'tarjetas', kicker: 'Señales del SIBO', titulo: 'Lo que tu tripa *te está diciendo*', icono: 'num', tarjetas: [
         ['Te hinchas a lo largo del día', 'Por la mañana bien; por la tarde, el pantalón ya aprieta.'],
         ['Gases y eructos frecuentes', 'Aunque comas poco y despacio.'],
@@ -69,7 +69,7 @@ const carruseles = [
   {
     carpeta: '2026-12-05-3-claves-navidad',
     slides: [
-      { tipo: 'portada', foto: 'DSC_0454.jpg', pos: 'center 15%', pill: 'Navidad sin hinchazón', pre: 'Disfruta sin miedo a comer', titulo: '3 claves para no acabar hinchada', sub: 'Lo que hago con mis pacientes en estas fiestas.' },
+      { tipo: 'portada', foto: 'IMG_9678.jpg', pos: 'center 75%', arriba: true, pill: 'Navidad sin hinchazón', pre: 'Disfruta sin miedo a comer', titulo: '3 claves para no acabar hinchada', sub: '' },
       { tipo: 'tarjetas', kicker: 'Esto es para ti', titulo: '¿Ya piensas en *cómo vas a acabar*?', icono: '→', tarjetas: [
         ['Hinchada después de la cena', 'Desabrochándote el botón a escondidas.'],
         ['Con gases y sin poder moverte', 'Mientras los demás siguen en la sobremesa.'],
@@ -87,7 +87,7 @@ const carruseles = [
   {
     carpeta: '2026-12-08-menu-navidad',
     slides: [
-      { tipo: 'portada', foto: 'ruth-sobre-mi.jpg', pos: 'center 30%', pill: 'Navidad sin hinchazón', pre: 'Abres la carta y no sabes qué pedir', titulo: 'Qué pedir en el menú de Navidad', sub: 'Si te hinchas con facilidad.' },
+      { tipo: 'portada', foto: 'IMG_9790.jpg', pos: 'center 25%', abajo: true, pill: 'Navidad sin hinchazón', pre: 'Abres la carta y no sabes qué pedir', titulo: 'Qué pedir en el menú de Navidad', sub: 'Si te hinchas con facilidad.' },
       { tipo: 'tarjetas', kicker: 'Antes de empezar', titulo: 'No es una lista de *prohibidos*', icono: '→', tarjetas: [
         ['Es una guía para elegir', 'Con más tranquilidad y menos miedo.'],
         ['Cada persona tolera cosas distintas', 'Por eso un plan tiene que ser personal.'],
@@ -116,12 +116,16 @@ em { font-family: 'Source Serif 4', serif; font-style: italic; font-weight: 400;
 /* portada */
 .portada img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .portada .velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(42,30,24,.72) 0%, rgba(42,30,24,.55) 55%, rgba(42,30,24,.70) 100%); }
-.portada .txt { position: absolute; left: 90px; right: 90px; top: 160px; color: #f4ece2; }
+.portada .txt { position: absolute; left: 90px; right: 90px; top: 120px; color: #f4ece2; }
 .portada .pre { font-family: 'Source Serif 4', serif; font-style: italic; font-size: 62px; margin-top: 46px; line-height: 1.15; }
 .portada h1 { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 118px; line-height: 1.02; color: #ecc5b7; margin-top: 30px; }
 .portada .raya { width: 90px; height: 3px; background: #f4ece2; margin: 56px 0 34px; opacity: .85; }
 .portada .sub { font-family: Inter, sans-serif; font-weight: 300; font-size: 40px; line-height: 1.45; max-width: 760px; }
 .portada .handle, .portada .flecha { color: #f4ece2; }
+.portada .velo.arriba { background: linear-gradient(180deg, rgba(42,30,24,.82) 0%, rgba(42,30,24,.6) 40%, rgba(42,30,24,.08) 70%, rgba(42,30,24,.35) 100%); }
+.portada img.claro { filter: brightness(1.25); }
+.portada .txt.abajo { top: auto; bottom: 140px; }
+.portada .velo.abajo { background: linear-gradient(180deg, rgba(42,30,24,.15) 0%, rgba(42,30,24,.25) 35%, rgba(42,30,24,.80) 62%, rgba(42,30,24,.88) 100%); }
 
 /* contenido */
 .cont { background: #f3ede4; color: #5b4033; padding: 90px 100px 150px; display: flex; flex-direction: column; justify-content: center; }
@@ -158,8 +162,8 @@ em { font-family: 'Source Serif 4', serif; font-style: italic; font-weight: 400;
 
 function slideHTML(s) {
   if (s.tipo === 'portada') {
-    return `<div class="s portada"><img src="${foto(s.foto)}" style="object-position:${s.pos}"><div class="velo"></div>
-      <div class="txt"><span class="pill">${s.pill}</span><div class="pre">${s.pre}</div><h1>${s.titulo}</h1><div class="raya"></div><div class="sub">${s.sub}</div></div>
+    return `<div class="s portada"><img class="${s.arriba ? 'claro' : ''}" src="${foto(s.foto)}" style="object-position:${s.pos}"><div class="velo${s.abajo ? ' abajo' : ''}${s.arriba ? ' arriba' : ''}"></div>
+      <div class="txt${s.abajo ? ' abajo' : ''}"><span class="pill">${s.pill}</span><div class="pre">${s.pre}</div><h1>${s.titulo}</h1>${s.sub ? `<div class="raya"></div><div class="sub">${s.sub}</div>` : ''}</div>
       <div class="handle">@ruthjimenez.nutrivia</div><div class="flecha">→</div></div>`;
   }
   if (s.tipo === 'tarjetas') {
