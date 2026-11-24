@@ -6,12 +6,15 @@ import {
 import {loadFont as loadSerif} from '@remotion/google-fonts/InstrumentSerif';
 import {loadFont as loadBebas} from '@remotion/google-fonts/BebasNeue';
 import {loadFont as loadPoppins} from '@remotion/google-fonts/Poppins';
+import {loadFont as loadFraunces} from '@remotion/google-fonts/Fraunces';
 import WORDS from './words.json';
 import {Cutaway, Photo} from './Illustrations';
 
 const serif = loadSerif('normal', {weights: ['400'], subsets: ['latin']}).fontFamily;
 loadSerif('italic', {weights: ['400'], subsets: ['latin']});
 const bebas = loadBebas('normal', {weights: ['400'], subsets: ['latin']}).fontFamily;
+const fraunces = loadFraunces('normal', {weights: ['800'], subsets: ['latin']}).fontFamily;
+loadFraunces('italic', {weights: ['800'], subsets: ['latin']});
 const pop = loadPoppins('normal', {weights: ['500', '600', '700'], subsets: ['latin']}).fontFamily;
 
 // Colores de marca
@@ -90,22 +93,33 @@ const chunks: Chunk[] = (() => {
 })();
 const clean = (w: string) => w.replace(/[.,]/g, '').toLowerCase().replace('sibo', 'SIBO');
 
+const KEY = new Set(['tratamiento', 'hinchazón', 'alivio', 'ilusión', 'principio', 'montaña', 'rusa', 'bacterias', 'parte',
+  'SIBO', 'terreno', 'suplementos', 'dietas', 'eternas', 'plan', 'digestión', 'ritmo', 'vida', 'recaída', 'miedo', 'sígueme', 'cero']);
+const CAP_SHADOW = '0 0 2px rgba(50,32,22,.55), 0 3px 4px rgba(50,32,22,.55), 0 6px 22px rgba(50,32,22,.45)';
+
 const Captions: React.FC = () => {
   const f = useCurrentFrame();
   const t = f / FPS;
   const c = chunks.find((k) => t >= k.s && t < k.e);
   if (!c || t > 35.9) return null;
-  const local = f - s2f(c.s);
-  const sc = interpolate(local, [0, 4], [0.86, 1], {extrapolateRight: 'clamp', easing: Easing.out(Easing.back(2))});
   return (
-    <AbsoluteFill style={{alignItems: 'center', top: 1150, height: 200}}>
-      <div style={{transform: `scale(${sc})`, fontFamily: pop, fontWeight: 600, fontSize: 64,
-        color: C.blanco, textShadow: '0 2px 3px rgba(50,32,22,.75), 0 4px 22px rgba(50,32,22,.6)', textAlign: 'center', padding: '0 80px', letterSpacing: -0.5}}>
-        {c.words.map((w, i) => (
-          <span key={i} style={{color: t >= w.s ? (t < w.e + 0.05 ? C.amarillo : C.blanco) : 'rgba(255,255,255,.72)'}}>
-            {clean(w.w)}{i < c.words.length - 1 ? ' ' : ''}
-          </span>
-        ))}
+    <AbsoluteFill style={{alignItems: 'center', top: 1130, height: 260}}>
+      <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'baseline', columnGap: 22,
+        padding: '0 70px', fontFamily: fraunces, fontWeight: 800}}>
+        {c.words.map((w, i) => {
+          const txt = clean(w.w);
+          const key = KEY.has(txt);
+          const local = f - s2f(w.s);
+          const p = spring({frame: local, fps: FPS, config: {damping: 11, stiffness: 260, mass: 0.6}});
+          if (local < 0) return null;
+          return (
+            <span key={i} style={{display: 'inline-block', fontSize: key ? 104 : 82, lineHeight: 1.05,
+              fontStyle: key ? 'italic' : 'normal', letterSpacing: key ? -1 : -0.5,
+              color: key ? C.amarillo : C.blanco, textShadow: CAP_SHADOW,
+              transform: `translateY(${(1 - p) * 26}px) scale(${0.7 + 0.3 * p}) rotate(${key ? -3 * p : 0}deg)`,
+              opacity: Math.min(1, p * 2)}}>{txt}</span>
+          );
+        })}
       </div>
     </AbsoluteFill>
   );
@@ -153,12 +167,11 @@ const Hook: React.FC<{dur: number}> = ({dur}) => {
   return (
     <AbsoluteFill style={{opacity: o}}>
       <div style={{position: 'absolute', left: 540, top: 330, width: 0, height: 0}}>
-        <div style={{position: 'absolute', left: -400, top: -250, width: 800, transform: `translate(${cardX}px, ${cardY}px) rotate(${rot}deg) scale(${scale})`,
-          opacity: appear, background: 'rgba(255,255,255,.97)', borderRadius: 36, padding: '30px 36px 34px',
-          boxShadow: f < 17 ? '0 30px 60px rgba(50,32,22,.35)' : '0 14px 34px rgba(50,32,22,.25)',
-          fontFamily: serif, color: C.tinta, textAlign: 'center', lineHeight: 0.98}}>
-          <div style={{fontSize: 66, whiteSpace: 'nowrap'}}>¿Terminaste el tratamiento</div>
-          <div style={{fontSize: 66, whiteSpace: 'nowrap'}}>y el <span style={{fontStyle: 'italic', color: C.marron, fontSize: 104}}>SIBO volvió?</span></div>
+        <div style={{position: 'absolute', left: -500, top: -250, width: 1000, transform: `translate(${cardX}px, ${cardY}px) rotate(${rot}deg) scale(${scale})`,
+          opacity: appear, padding: '30px 0 34px',
+          fontFamily: serif, color: C.blanco, textShadow: f < 17 ? '0 4px 6px rgba(50,32,22,.5), 0 18px 40px rgba(50,32,22,.5)' : SHADOW, textAlign: 'center', lineHeight: 0.98}}>
+          <div style={{fontSize: 74, whiteSpace: 'nowrap'}}>¿Terminaste el tratamiento</div>
+          <div style={{fontSize: 74, whiteSpace: 'nowrap'}}>y el <span style={{fontStyle: 'italic', color: C.amarillo, fontSize: 116}}>SIBO volvió?</span></div>
         </div>
         {f >= 17 && ripple < 1 && (
           <div style={{position: 'absolute', left: 330 - 70 * ripple - 10, top: -60 - 70 * ripple - 10, width: 20 + 140 * ripple, height: 20 + 140 * ripple,
