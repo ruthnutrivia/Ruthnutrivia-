@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  AbsoluteFill, Composition, Freeze, OffthreadVideo, Sequence, interpolate, spring,
+  AbsoluteFill, Audio, Composition, Freeze, OffthreadVideo, Sequence, interpolate, spring,
   staticFile, useCurrentFrame, useVideoConfig, Easing,
 } from 'remotion';
 import {loadFont as loadSerif} from '@remotion/google-fonts/InstrumentSerif';
@@ -21,6 +21,7 @@ const C = {
   beige: '#EFE4D3',     // beige
   amarillo: '#F7E9A8',  // amarillo clarito
   marron: '#B48A6A',    // marrón clarito
+  amarilloOsc: '#E9CF72',
   tinta: '#5B4334',     // marrón oscuro para texto sobre tarjetas
 };
 const SHADOW = '0 2px 4px rgba(60,40,28,.45), 0 4px 18px rgba(60,40,28,.45)';
@@ -111,17 +112,63 @@ const Captions: React.FC = () => {
 };
 
 // ---------- gráficos ----------
-const Hook: React.FC<{dur: number}> = ({dur}) => {
-  const a = usePop(0), b = usePop(6), c = usePop(14);
-  const o = useFadeOut(dur);
-  const line = (p: number): React.CSSProperties => ({opacity: p, transform: `translateY(${(1 - p) * 30}px)`});
+const HandCursor: React.FC<{press: number}> = ({press}) => {
+  const shapes = (
+    <>
+      <rect x="0" y="0" width="38" height="125" rx="19" />
+      <rect x="36" y="62" width="34" height="80" rx="17" />
+      <rect x="68" y="70" width="32" height="74" rx="16" />
+      <rect x="98" y="82" width="30" height="64" rx="15" />
+      <rect x="-6" y="100" width="134" height="110" rx="40" />
+      <rect x="-52" y="112" width="70" height="38" rx="19" transform="rotate(35 -17 131)" />
+    </>
+  );
   return (
-    <AbsoluteFill style={{alignItems: 'center', top: 150, opacity: o}}>
-      <div style={{fontFamily: serif, color: C.blanco, textShadow: SHADOW, textAlign: 'center', lineHeight: 0.95}}>
-        <div style={{...line(a), fontSize: 96}}>¿Terminaste el</div>
-        <div style={{...line(b), fontSize: 96}}>tratamiento y el</div>
-        <div style={{...line(c), fontSize: 150, fontStyle: 'italic', color: C.amarillo}}>SIBO volvió?</div>
+    <svg width="190" height="250" viewBox="-60 -10 200 230" style={{transform: `scale(${1 - 0.12 * press})`, transformOrigin: '19px 0px', overflow: 'visible',
+      filter: 'drop-shadow(0 8px 14px rgba(50,32,22,.35))'}}>
+      <g fill={C.tinta} stroke={C.tinta} strokeWidth="14" strokeLinejoin="round">{shapes}</g>
+      <g fill="#FFFFFF">{shapes}</g>
+      <path d="M38 105 L38 140 M70 120 L70 145 M100 128 L100 148" stroke="#E3D6C6" strokeWidth="4" strokeLinecap="round" />
+    </svg>
+  );
+};
+
+const Hook: React.FC<{dur: number}> = ({dur}) => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const o = useFadeOut(dur);
+  const ease = Easing.inOut(Easing.cubic);
+  // 0-16: arrastra · 16-20: clic · 22-38: la mano se va
+  const drag = interpolate(f, [0, 16], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: ease});
+  const press = interpolate(f, [15, 18, 22], [0, 1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const drop = spring({frame: f - 17, fps, config: {damping: 9, stiffness: 220, mass: 0.6}});
+  const leave = interpolate(f, [22, 38], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.in(Easing.cubic)});
+  const appear = interpolate(f, [0, 5], [0, 1], {extrapolateRight: 'clamp'});
+  const cardX = (1 - drag) * 230, cardY = (1 - drag) * 520;
+  const rot = interpolate(drag, [0, 1], [9, -1]) + (f >= 17 ? -2 * drop : 0);
+  const scale = (0.86 + 0.14 * drag) * (f >= 17 ? 1 + 0.06 * (1 - drop) : 1.04);
+  const ripple = interpolate(f, [17, 30], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  // la punta del dedo agarra la esquina inferior derecha de la etiqueta
+  const tipX = 330 + cardX + leave * 420, tipY = -60 + cardY + leave * 700;
+  return (
+    <AbsoluteFill style={{opacity: o}}>
+      <div style={{position: 'absolute', left: 540, top: 330, width: 0, height: 0}}>
+        <div style={{position: 'absolute', left: -400, top: -250, width: 800, transform: `translate(${cardX}px, ${cardY}px) rotate(${rot}deg) scale(${scale})`,
+          opacity: appear, background: 'rgba(255,255,255,.97)', borderRadius: 36, padding: '30px 36px 34px',
+          boxShadow: f < 17 ? '0 30px 60px rgba(50,32,22,.35)' : '0 14px 34px rgba(50,32,22,.25)',
+          fontFamily: serif, color: C.tinta, textAlign: 'center', lineHeight: 0.98}}>
+          <div style={{fontSize: 66, whiteSpace: 'nowrap'}}>¿Terminaste el tratamiento</div>
+          <div style={{fontSize: 66, whiteSpace: 'nowrap'}}>y el <span style={{fontStyle: 'italic', color: C.marron, fontSize: 104}}>SIBO volvió?</span></div>
+        </div>
+        {f >= 17 && ripple < 1 && (
+          <div style={{position: 'absolute', left: 330 - 70 * ripple - 10, top: -60 - 70 * ripple - 10, width: 20 + 140 * ripple, height: 20 + 140 * ripple,
+            borderRadius: '50%', border: `8px solid ${C.amarilloOsc ?? C.amarillo}`, opacity: 1 - ripple}} />
+        )}
+        <div style={{position: 'absolute', left: tipX - 75, top: tipY - 9, opacity: appear * (1 - leave)}}>
+          <HandCursor press={press} />
+        </div>
       </div>
+      <Sequence from={17} durationInFrames={10} layout="none"><Audio src={staticFile('click.wav')} volume={0.8} /></Sequence>
     </AbsoluteFill>
   );
 };
