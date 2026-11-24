@@ -7,7 +7,7 @@ import {loadFont as loadSerif} from '@remotion/google-fonts/InstrumentSerif';
 import {loadFont as loadBebas} from '@remotion/google-fonts/BebasNeue';
 import {loadFont as loadPoppins} from '@remotion/google-fonts/Poppins';
 import WORDS from './words.json';
-import {Cutaway, BloatedWoman, GutBacteria, SupplementsTable, CalmCup} from './Illustrations';
+import {Cutaway, Photo} from './Illustrations';
 
 const serif = loadSerif('normal', {weights: ['400'], subsets: ['latin']}).fontFamily;
 loadSerif('italic', {weights: ['400'], subsets: ['latin']});
@@ -200,7 +200,7 @@ const Pill: React.FC<{text: string; dur: number}> = ({text, dur}) => {
   const p = usePop(0);
   const o = useFadeOut(dur, 10);
   return (
-    <AbsoluteFill style={{alignItems: 'center', top: 250, opacity: o}}>
+    <AbsoluteFill style={{alignItems: 'center', top: 85, opacity: o}}>
       <div style={{background: C.rosa, color: C.tinta, fontFamily: pop, fontWeight: 700, fontSize: 58,
         padding: '22px 56px', borderRadius: 999, boxShadow: '0 10px 30px rgba(60,40,28,.3)',
         transform: `scale(${p}) rotate(-3deg)`}}>{text}</div>
@@ -246,10 +246,12 @@ const Seq: React.FC<{from: number; to: number; children: (dur: number) => React.
 const Edit: React.FC = () => (
   <AbsoluteFill>
     <Base />
-    <Seq from={4.85} to={8.35}>{(d) => <Cutaway dur={d}><BloatedWoman /></Cutaway>}</Seq>
-    <Seq from={12.3} to={14.6}>{(d) => <Cutaway dur={d}><GutBacteria /></Cutaway>}</Seq>
-    <Seq from={19.0} to={21.5}>{(d) => <Cutaway dur={d}><SupplementsTable /></Cutaway>}</Seq>
-    <Seq from={28.3} to={30.3}>{(d) => <Cutaway dur={d}><CalmCup /></Cutaway>}</Seq>
+    <Seq from={4.85} to={6.5}>{(d) => <Cutaway dur={d}><Photo src="7298676.jpg" pos="42% 50%" dur={d} /></Cutaway>}</Seq>
+    <Seq from={6.45} to={8.35}>{(d) => <Cutaway dur={d}><Photo src="5938365.jpg" pos="78% 40%" dur={d} zoomFrom={1.05} zoomTo={1.15} /></Cutaway>}</Seq>
+    <Seq from={12.3} to={14.6}>{(d) => <Cutaway dur={d}><Photo src="11516492.jpg" pos="52% 50%" dur={d} zoomFrom={1.0} zoomTo={1.18} /></Cutaway>}</Seq>
+    <Seq from={19.0} to={20.3}>{(d) => <Cutaway dur={d}><Photo src="15897781.jpg" pos="50% 50%" dur={d} /></Cutaway>}</Seq>
+    <Seq from={20.25} to={21.6}>{(d) => <Cutaway dur={d}><Photo src="13779107.jpg" pos="38% 50%" dur={d} slideOut={d - 14} /></Cutaway>}</Seq>
+    <Seq from={28.3} to={30.3}>{(d) => <Cutaway dur={d}><Photo src="6874185.jpg" pos="50% 45%" dur={d} zoomFrom={1.08} zoomTo={1.0} /></Cutaway>}</Seq>
     <Seq from={0} to={3.7}>{(d) => <Hook dur={d} />}</Seq>
     <Seq from={3.75} to={4.8}>{(d) => <Keyword text="HINCHAZÓN" sub="y la" dur={d} color={C.rosa} />}</Seq>
 

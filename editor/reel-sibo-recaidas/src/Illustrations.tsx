@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill, interpolate, spring, useCurrentFrame, Easing} from 'remotion';
+import {AbsoluteFill, interpolate, spring, useCurrentFrame, Easing, Img, staticFile} from 'remotion';
 
 const FPS = 30;
 export const P = {
@@ -244,5 +244,24 @@ export const CalmCup: React.FC = () => {
         })}
       </svg>
     </Bg>
+  );
+};
+
+// ---------- fotos reales (Pexels) ----------
+export const Photo: React.FC<{src: string; pos?: string; dur: number; zoomFrom?: number; zoomTo?: number; slideOut?: number}> = ({src, pos = '50% 50%', dur, zoomFrom = 1.0, zoomTo = 1.08, slideOut}) => {
+  const f = useCurrentFrame();
+  const z = interpolate(f, [0, dur], [zoomFrom, zoomTo], clamp);
+  const slide = slideOut === undefined ? 0 : interpolate(f, [slideOut, dur], [0, -1150], {...clamp, easing: Easing.in(Easing.cubic)});
+  const blur = slideOut === undefined ? 0 : interpolate(f, [slideOut, dur], [0, 14], clamp);
+  return (
+    <AbsoluteFill style={{background: P.beige}}>
+      <AbsoluteFill style={{transform: `translateX(${slide}px) scale(${z})`, filter: `blur(${blur}px)`}}>
+        <Img src={staticFile(src)} style={{width: '100%', height: '100%', objectFit: 'cover', objectPosition: pos,
+          filter: 'sepia(0.12) saturate(0.92) brightness(1.03) contrast(1.02)'}} />
+        {/* tono cálido de marca + viñeta suave */}
+        <AbsoluteFill style={{background: 'rgba(239,228,211,0.10)', mixBlendMode: 'soft-light'}} />
+        <AbsoluteFill style={{background: 'radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 55%, rgba(60,40,28,0.28) 100%)'}} />
+      </AbsoluteFill>
+    </AbsoluteFill>
   );
 };
