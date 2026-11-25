@@ -19,7 +19,7 @@ const carruseles = [
   {
     carpeta: '2026-11-27-lo-sano-que-te-hincha',
     slides: [
-      { tipo: 'portada', foto: 'IMG_5316.jpg', pos: 'center 20%', abajo: true, pill: 'Hinchazón y SIBO', pre: 'Lo hacías por cuidarte…', titulo: 'Lo «sano» que te está hinchando', sub: 'No todo lo sano le sienta bien a tu tripa.' },
+      { tipo: 'portada', foto: 'IMG_5318.jpg', pos: 'center 30%', abajo: true, partido: true, bajo: true, pill: 'Hinchazón y SIBO', pre: 'Lo hacías por cuidarte…', titulo: 'Lo «sano» que te está hinchando', sub: 'No todo lo sano le sienta bien a tu tripa.' },
       { tipo: 'tarjetas', kicker: '¿Te suena?', titulo: 'Batido verde, ensalada gigante, *kéfir…*', icono: '→', tarjetas: [
         ['Comes «sano» cada día', 'Verdura, fruta, fermentados… todo lo que se supone que hay que comer.'],
         ['Haces todo lo «correcto»', 'Has leído, te has informado y lo aplicas.'],
