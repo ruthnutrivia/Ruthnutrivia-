@@ -13,7 +13,7 @@ const CSS = `@import url('https://fonts.googleapis.com/css2?family=Playfair+Disp
 *{margin:0;padding:0} body{width:1080px;height:1920px;background:transparent}
 .b{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%) scaleX(.78);transform-origin:center center;text-align:center;font-family:'Playfair Display',serif;font-weight:600;color:#fff3c4;
    text-shadow:0 0 2px rgba(0,0,0,.8),0 3px 10px rgba(0,0,0,.6),0 6px 28px rgba(0,0,0,.45)}
-.l{line-height:.9;white-space:nowrap} .g{color:#f7c600;font-weight:700}`;
+.l{line-height:.9;white-space:nowrap} .g{color:#fff3c4;font-weight:700}`;
 (async () => {
   const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1080, height: 1920 } });
   const plan = [], n = lineas.length;
