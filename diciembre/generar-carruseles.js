@@ -80,7 +80,7 @@ const carruseles = [
         ['Despacio y raciones pequeñas', 'Sírvete un poco de lo que más te apetezca en vez de picar de todo.'],
         ['Un paseo después de comer', '10 o 15 minutos ayudan a tu digestión más que el sofá.'],
       ] },
-      { tipo: 'impacto', pill: 'Recuerda', grande: '✦', titulo: 'No se trata de comer menos', texto: 'Se trata de que tu intestino funcione mejor.', cursiva: 'Y eso se puede trabajar.' },
+      { tipo: 'frase', kicker: 'Recuerda', titulo: 'No se trata de comer *menos*', cita: 'Se trata de que tu intestino funcione mejor. Y eso se puede trabajar.' },
       { tipo: 'cierre', titulo: '¿Quieres la guía completa para estas fiestas?', texto: 'Qué pedir, cómo organizar el día de la comida y qué hacer al día siguiente.', boton: ['Comenta la palabra', '«NAVIDAD»'] },
     ],
   },
@@ -113,7 +113,7 @@ const carruseles = [
         ['Adaptar la dieta a su vida real', 'No a una lista sacada de internet.'],
         ['Reintroducir alimentos poco a poco', 'Porque la dieta baja en FODMAP es temporal, no para siempre.'],
       ] },
-      { tipo: 'impacto', pill: 'Recuerda', grande: '✦', titulo: 'La dieta baja en FODMAP no es para siempre', texto: 'Es una herramienta temporal.', cursiva: 'Lo importante viene después.' },
+      { tipo: 'frase', kicker: 'Recuerda', titulo: 'La dieta baja en FODMAP *no es para siempre*', cita: 'Es una herramienta temporal. Lo importante viene después: volver a comer variado.' },
       { tipo: 'cierre', titulo: '¿Te reconoces en su historia?', texto: 'Miramos tu caso juntas en una llamada gratuita.', boton: ['Escríbeme la palabra', '«VALORACIÓN»'] },
     ],
   },
@@ -207,6 +207,12 @@ em { font-family: 'Source Serif 4', serif; font-style: italic; font-weight: 400;
 .tj p { font-family: Inter, sans-serif; font-weight: 300; font-size: 33px; line-height: 1.5; color: #6e5649; margin-top: 8px; }
 .cont .handle { color: #a39187; } .cont .flecha { color: #b05e51; }
 
+/* frase */
+.frase { text-align: center; align-items: center; }
+.frase h2 { font-size: 92px; }
+.frase .comillas { font-family: 'Source Serif 4', serif; font-size: 300px; line-height: .6; color: #ecc5b7; height: 130px; }
+.frase .cita { margin-top: 70px; width: 100%; background: #f0ded7; border-left: 12px solid #d48b80; border-radius: 0 34px 34px 0; padding: 46px 54px;
+  text-align: left; font-family: 'Source Serif 4', serif; font-style: italic; font-size: 50px; line-height: 1.4; color: #5b4033; }
 /* impacto */
 .impacto { background: #b05e51; color: #f4ece2; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 90px 60px; }
 .circ { position: absolute; border-radius: 50%; background: rgba(255,255,255,.1); }
@@ -253,6 +259,11 @@ function slideHTML(s) {
       <div class="tj"><div class="ic verde">✓</div><div><h3>Mejor opción</h3><p>${s.mejor}</p></div></div>
       <div class="tj"><div class="ic">!</div><div><h3>Con cuidado</h3><p>${s.cuidado}</p></div></div>
       <div class="tj"><div class="ic">✦</div><div><h3>Mi truco</h3><p>${s.truco}</p></div></div></div>
+      <div class="handle">@ruthjimenez.nutrivia</div><div class="flecha">→</div></div>`;
+  }
+  if (s.tipo === 'frase') {
+    return `<div class="s cont frase"><div class="comillas">“</div><div class="kicker">${s.kicker}</div><h2>${fmt(s.titulo)}</h2>
+      <div class="cita">${s.cita}</div>
       <div class="handle">@ruthjimenez.nutrivia</div><div class="flecha">→</div></div>`;
   }
   if (s.tipo === 'impacto') {
