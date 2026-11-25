@@ -3,15 +3,15 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
 const lineas = [
-  ['Por la mañana', 74], ['tripa', 96], ['PLANA', 190, 1],
-  ['y por la tarde', 74], ['de 5 meses', 120],
-  ['no es', 66], ['casualidad', 112],
-  ['te lo explico en la', 62], ['DESCRIPCIÓN 👇', 118, 1],
+  ['Por la mañana', 90], ['tripa', 117], ['PLANA', 232, 1],
+  ['y por la tarde', 90], ['de 5 meses', 146],
+  ['no es', 81], ['casualidad', 137],
+  ['te lo explico en la', 76], ['DESCRIPCIÓN 👇', 144, 1],
 ];
 const DUR = 11.43, VENT = 9.4;
 const CSS = `@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap');
 *{margin:0;padding:0} body{width:1080px;height:1920px;background:transparent}
-.b{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%) scaleX(.78);text-align:center;font-family:'Playfair Display',serif;font-weight:600;color:#fff3c4;
+.b{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%) scaleX(.78);transform-origin:center center;text-align:center;font-family:'Playfair Display',serif;font-weight:600;color:#fff3c4;
    text-shadow:0 0 2px rgba(0,0,0,.8),0 3px 10px rgba(0,0,0,.6),0 6px 28px rgba(0,0,0,.45)}
 .l{line-height:.9;white-space:nowrap} .g{color:#f7c600;font-weight:700}`;
 (async () => {
