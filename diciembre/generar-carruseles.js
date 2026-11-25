@@ -26,7 +26,7 @@ const carruseles = [
         ['Y aun así acabas hinchada', 'No es dejadez ni falta de esfuerzo.'],
       ] },
       { tipo: 'tarjetas', kicker: 'Lo que nadie te cuenta', titulo: 'Alimentos con buena fama que *pueden hincharte*', icono: 'num', tarjetas: [
-        ['Mucha verdura cruda', 'Ensaladas grandes y crudités: más trabajo para una tripa sensible.'],
+        ['Mucha verdura cruda', 'Ensaladas grandes y verdura cruda a diario: más trabajo para una tripa sensible.'],
         ['Fermentados', 'Kéfir, chucrut o kombucha no sientan bien a todas cuando hay SIBO.'],
         ['Legumbres en cantidad', 'Son ricas en fibra que fermenta en el intestino.'],
       ] },
