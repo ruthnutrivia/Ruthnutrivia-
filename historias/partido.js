@@ -9,7 +9,6 @@ const html = `<html><head><link href="https://fonts.googleapis.com/css2?family=P
   <div style="font-family:'Playfair Display',serif;font-weight:600;font-size:88px">Plan de <i style="font-weight:500">miércoles</i></div>
   <div style="font-family:Inter,sans-serif;font-weight:500;font-size:40px;letter-spacing:.06em;margin-top:18px">Copa Catalunya · Hospitalet vs Espanyol</div>
 </div>
-<div style="position:absolute;left:70px;bottom:230px;font-size:96px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.5))">⚽👩‍❤️‍👨</div>
 </body></html>`;
 (async () => { const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1080, height: 1920 } });
   await p.setContent(html, { waitUntil: 'networkidle' }); await p.evaluate(() => document.fonts.ready);
